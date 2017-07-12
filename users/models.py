@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 	photo_url = models.URLField(max_length=400, blank=True)
 
 	def __str__(self):
-		return self.first_name + ' ' + self.last_name
+		return str(self.user.id)
 
 def create_profile(sender, **kwargs):
 	if kwargs['created']:
