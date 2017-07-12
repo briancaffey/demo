@@ -2,16 +2,11 @@
 
 
 
-{% block page_title %}Users{% endblock %}
+{% block page_title %}{{ person.userprofile.first_name}} {{ person.userprofile.last_name}}{% endblock %}
 
 {% block content %}
 {% include 'nav.html' %}
-
-
 <div class="col-md-9 col-md-offset-1">
-  <h1>Welcome to Lead!</h1>
-{% for user in users %}
-
 <div class="thumbnail">
   <div class="caption post-detail-item">
     <div class="row">
@@ -24,11 +19,12 @@
       {% if user.userprofile.is_facebook_connected %}<span class="btn btn-default">Facebook: connected</span>{% endif %}
       {% if user.userprofile.is_linkedin_connected %}<span class="btn btn-default">LinkedIn: connected</span>{% endif %}
       <br /><br />
-      <a class="btn btn-primary" href="{% url 'users:profile_view' id=user.id %}">View</a>
+      <hr>
+      <p>{{ user.userprofile.bio }}</p>
       </div>
     </div>
   </div>
 </div>
-{% endfor %}
 </div>
+
 {% endblock content%}
