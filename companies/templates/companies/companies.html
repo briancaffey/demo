@@ -2,7 +2,7 @@
 {% load render_bundle from webpack_loader %}
 
 {% block content %}
-
+{% include 'nav.html' %}
 <div id="container">
 {% render_bundle 'main' %}
 </div>
