@@ -17,9 +17,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
+from .api.views import (
+    CompanyListAPIView,
+)
+
+
+
 
 urlpatterns = [
     url(r'^$', views.company_list, name="company_list"),
     url(r'^(?P<id>\d+)/$', views.company_view, name="company_view"),
-
+    url(r'^api/$', CompanyListAPIView.as_view(), name='api_list'),
 ]

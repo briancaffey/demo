@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^$', views.home_redirect, name="home"),
     url(r'^users/', include('users.urls', namespace="users")),
     url(r'^companies/', include('companies.urls', namespace="companies")),
+
 ]

@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 
-class Company:
+class Company(models.Model):
 	company_name = models.CharField(max_length=100, default='')
 	company_url = models.URLField(max_length=400, blank=True)
-    # 
-    # class Meta:
-    #     ordering = ('company_name')
+
+	def __str__(self):
+		return str(self.company_name)
