@@ -7,7 +7,7 @@ module.exports = {
   context: __dirname,
   entry: './assets/js/index',
   output: {
-    path: path.resolve('./static/bundles/'),
+    path: path.resolve('./assets/bundles/'),
     publicPath: '/static/bundles/',
     filename: '[name]-[hash].js',
   },
