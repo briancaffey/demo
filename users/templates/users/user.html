@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load render_bundle from webpack_loader %}
 
 
 {% block page_title %}{{ person.userprofile.first_name}} {{ person.userprofile.last_name}}{% endblock %}
@@ -7,7 +7,11 @@
 {% block content %}
 {% include 'nav.html' %}
 <div class="col-md-9 col-md-offset-1">
-<div class="thumbnail">
+
+  <div id="usercontainer">
+  {% render_bundle 'main' %}
+  </div>
+<!-- <div class="thumbnail">
   <div class="caption post-detail-item">
     <div class="row">
     <div class="col-md-3">
@@ -24,7 +28,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 </div>
 
 {% endblock content%}
