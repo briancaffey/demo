@@ -16,9 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
+from .api.views import (
+    UserListAPIView,
+)
 
 urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^(?P<id>\d+)/$', views.profile_view, name="profile_view"),
-
+    url(r'^api/$', UserListAPIView.as_view(), name='user_list'),
 ]

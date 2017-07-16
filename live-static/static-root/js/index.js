@@ -1,6 +1,7 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
+if(document.getElementById('container')) {
 var CompanyList = React.createClass({
   loadCompaniesFromServer: function(){
     console.log('something')
@@ -25,9 +26,8 @@ var CompanyList = React.createClass({
   },
   render: function(){
     if (this.state.data){
-      console.log('DATA!')
       var companyNodes = this.state.data.map(function(company){
-        return <li>{company.company_name} </li>
+        return <li><a href={company.company_url}>{company.company_name}</a> </li>
       })
     }
     return (
@@ -40,7 +40,69 @@ var CompanyList = React.createClass({
     )
   }
 })
-
-
 ReactDOM.render(<CompanyList url='/companies/api/' pollInterval={1000} />,
 document.getElementById('container'))
+}
+
+if(document.getElementById('userscontainer')) {
+var UserList = React.createClass({
+  loadUsersFromServer: function(){
+    console.log('something')
+    $.ajax({
+      url: this.props.url,
+      datatype: 'json',
+      cache: false,
+      success: function(data){
+        this.setState({data:data});
+      }.bind(this)
+    })
+  },
+
+  getInitialState: function(){
+    return {data: []};
+  },
+
+  componentDidMount: function(){
+    this.loadUsersFromServer();
+    setInterval(this.loadUsersFromServer,
+                this.props.pollInterval)
+  },
+  render: function(){
+    if (this.state.data){
+      var userNodes = this.state.data.map(function(user){
+        return (
+          <div className="thumbnail" key={user.user}>
+          <div className="caption post-detail-item">
+            <div className="row">
+            <div className="col-md-3">
+              <img className="img-responsive" src={user.photo_url}/>
+            </div>
+              <div className="col-md-9">
+              <h2>{user.first_name} {user.last_name}</h2>
+              <h4>{user.job_title} @ {user.current_company}</h4>
+              {user.is_facebook_connected ? <button className="btn btn-default">Facebook: Connected</button> :''}
+              {user.is_linkedin_connected ? <button className="btn btn-default">LinkedIn: Connected</button> :''}
+              <br /><br />
+              <a className="btn btn-primary" href={"/"+user.user_profile_url}>View</a>
+              </div>
+            </div>
+          </div>
+        </div>)
+      })
+    }
+    return (
+      <div>
+        <h1>Women in the Lead Network</h1>
+
+          {userNodes}
+
+      </div>
+    )
+  }
+})
+
+
+ReactDOM.render(<UserList url='/users/api/' pollInterval={1000} />,
+document.getElementById('userscontainer'))
+
+}

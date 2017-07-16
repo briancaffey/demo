@@ -6,4 +6,4 @@ def company_list(request):
 
 
 def company_view(request, id):
-    pass
+    return render(request, 'companies/company.html')

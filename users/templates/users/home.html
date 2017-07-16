@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load render_bundle from webpack_loader %}
 
 
 {% block page_title %}Users{% endblock %}
@@ -9,7 +9,11 @@
 
 
 <div class="col-md-9 col-md-offset-1">
-  <h1>Welcome to Lead!</h1>
+
+  <div id="userscontainer">
+  {% render_bundle 'main' %}
+  </div>
+  <!-- <h1>Welcome to Lead!</h1>
 {% for user in users %}
 
 <div class="thumbnail">
@@ -29,6 +33,6 @@
     </div>
   </div>
 </div>
-{% endfor %}
+{% endfor %} -->
 </div>
 {% endblock content%}
